@@ -1,25 +1,37 @@
-import './App.scss'
-import logo from 'assets/logo.svg'
+import HeaderContainer from 'containers/HeaderContainer/HeaderContainer';
+import Home from 'pages/Home/Home';
+import { Route, Switch } from 'react-router-dom';
+import { createGlobalStyle } from 'styled-components';
+import MovieList from '../pages/Movie/MovieList';
+
+const GlobalStyle = createGlobalStyle`
+  body { 
+    margin: 0;
+    font: 1rem/1.5 "Spoqa Han Sans Neo", sans-serif;
+    background: #000;
+    color: #fff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    width: 100%;
+  }
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <code>src/App.js</code> 문서를 수정하면 실시간 업데이트 됩니다
-        </p>
-        <a
-          className="App-link"
-          href="https://ko.reactjs.org"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          React를 배워보세요
-        </a>
-      </header>
-    </div>
-  )
+    <>
+      <HeaderContainer />
+      <Switch>
+        <Route path="/" component={Home} exact />
+        <Route path="/movies" component={MovieList} />
+      </Switch>
+      <GlobalStyle />
+    </>
+  );
 }
 
-export default App
+export default App;
