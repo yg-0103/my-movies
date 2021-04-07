@@ -1,4 +1,4 @@
-import Effect from 'Effect/Effect';
+import Effect from 'components/Effect/Effect';
 import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import Vision from 'components/Vision/Vision';

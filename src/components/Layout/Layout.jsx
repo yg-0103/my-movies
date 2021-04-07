@@ -10,6 +10,7 @@ function Layout({ children }) {
 }
 
 const LayoutFlexContainer = styled.div`
+  position: relative;
   padding: 20px;
   display: flex;
   width: ${props => props.width};

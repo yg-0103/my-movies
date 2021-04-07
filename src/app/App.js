@@ -3,6 +3,7 @@ import Home from 'pages/Home/Home';
 import { Route, Switch } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
 import MovieList from '../pages/Movie/MovieList';
+import MovieDetail from '../pages/Movie/MovieDetail';
 
 const GlobalStyle = createGlobalStyle`
   body { 
@@ -28,6 +29,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/movies" component={MovieList} />
+        <Route path="/movie/:id" component={MovieDetail} />
       </Switch>
       <GlobalStyle />
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import effect from '../assets/effect.gif';
+import effect from 'assets/effect.gif';
 
 const EffectWrapper = styled.div`
   position: relative;

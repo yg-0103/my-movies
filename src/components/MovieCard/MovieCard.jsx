@@ -29,8 +29,8 @@ const MovieLink = styled(Link)`
 function MovieCard({ movie, children }) {
   return (
     <MovieWrapper>
-      <MovieLink to="/movies">
-        <img src={tmdb.getImageURL(movie.poster_path)} alt="" />
+      <MovieLink to={`/movie/${movie.id}`}>
+        <img src={tmdb.getImageURL(movie.poster_path)} alt="영화 포스터" />
       </MovieLink>
     </MovieWrapper>
   );
