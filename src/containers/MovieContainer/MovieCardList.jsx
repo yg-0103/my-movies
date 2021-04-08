@@ -1,11 +1,12 @@
 import tmdb from 'api/tmdb';
 import { motion } from 'framer-motion';
 import { getMoviesActionThunk } from 'module/movies';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import MovieCard from '../../components/MovieCard/MovieCard';
 import { ReactComponent as Loading } from 'assets/loading.svg';
+import { useRef } from 'react';
 
 const MovieCardListWrapper = styled(motion.ul)`
   padding: 0;
@@ -28,6 +29,7 @@ const MovieCardListWrapper = styled(motion.ul)`
 
 function MovieCardList({ currentSlide }) {
   const { loading, data } = useSelector(state => state.movies.movies);
+  const [fakeData, setFakeData] = useState(null);
   const move = currentSlide * -180;
   const dispatch = useDispatch();
 
@@ -35,14 +37,20 @@ function MovieCardList({ currentSlide }) {
     dispatch(getMoviesActionThunk(tmdb.discover()));
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!data) return;
+    setFakeData(fakeData => {
+      if (!fakeData) return data.results;
+      const firstMovie = fakeData.shift();
+      return [...fakeData, firstMovie];
+    });
+  }, [data, currentSlide]);
   return (
     <>
-      <MovieCardListWrapper
-        animate={{ x: move, transition: { type: 'tween' } }}
-      >
+      <MovieCardListWrapper animate={{ x: 0, transition: { type: 'tween' } }}>
         {loading && <Loading id="loading">로딩중...</Loading>}
-        {data &&
-          data.results.map(movie => (
+        {fakeData &&
+          fakeData.map(movie => (
             <MovieCard key={movie.id} movie={movie}></MovieCard>
           ))}
       </MovieCardListWrapper>
